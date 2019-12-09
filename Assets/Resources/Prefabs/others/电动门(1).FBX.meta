@@ -1,0 +1,296 @@
+fileFormatVersion: 2
+guid: b91f5c65c0c7f4dcda72b53ea8deb70d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Obj3d66-543873-1-344
+    100002: Obj3d66-543873-10-33
+    100004: Obj3d66-543873-11-382
+    100006: Obj3d66-543873-12-607
+    100008: Obj3d66-543873-13-963
+    100010: Obj3d66-543873-14-890
+    100012: Obj3d66-543873-15-264
+    100014: Obj3d66-543873-16-751
+    100016: Obj3d66-543873-17-221
+    100018: Obj3d66-543873-18-271
+    100020: Obj3d66-543873-19-498
+    100022: Obj3d66-543873-2-699
+    100024: Obj3d66-543873-20-243
+    100026: Obj3d66-543873-21-5
+    100028: Obj3d66-543873-22-176
+    100030: Obj3d66-543873-23-185
+    100032: Obj3d66-543873-24-448
+    100034: Obj3d66-543873-25-312
+    100036: Obj3d66-543873-26-835
+    100038: Obj3d66-543873-27-1
+    100040: Obj3d66-543873-28-89
+    100042: Obj3d66-543873-29-259
+    100044: Obj3d66-543873-3-80
+    100046: Obj3d66-543873-30-921
+    100048: Obj3d66-543873-31-631
+    100050: Obj3d66-543873-32-9
+    100052: Obj3d66-543873-33-41
+    100054: Obj3d66-543873-34-955
+    100056: Obj3d66-543873-35-890
+    100058: Obj3d66-543873-36-724
+    100060: Obj3d66-543873-37-514
+    100062: Obj3d66-543873-38-465
+    100064: Obj3d66-543873-39-245
+    100066: Obj3d66-543873-4-341
+    100068: Obj3d66-543873-5-782
+    100070: Obj3d66-543873-6-790
+    100072: Obj3d66-543873-7-357
+    100074: Obj3d66-543873-8-977
+    100076: Obj3d66-543873-9-13
+    100078: //RootNode
+    400000: Obj3d66-543873-1-344
+    400002: Obj3d66-543873-10-33
+    400004: Obj3d66-543873-11-382
+    400006: Obj3d66-543873-12-607
+    400008: Obj3d66-543873-13-963
+    400010: Obj3d66-543873-14-890
+    400012: Obj3d66-543873-15-264
+    400014: Obj3d66-543873-16-751
+    400016: Obj3d66-543873-17-221
+    400018: Obj3d66-543873-18-271
+    400020: Obj3d66-543873-19-498
+    400022: Obj3d66-543873-2-699
+    400024: Obj3d66-543873-20-243
+    400026: Obj3d66-543873-21-5
+    400028: Obj3d66-543873-22-176
+    400030: Obj3d66-543873-23-185
+    400032: Obj3d66-543873-24-448
+    400034: Obj3d66-543873-25-312
+    400036: Obj3d66-543873-26-835
+    400038: Obj3d66-543873-27-1
+    400040: Obj3d66-543873-28-89
+    400042: Obj3d66-543873-29-259
+    400044: Obj3d66-543873-3-80
+    400046: Obj3d66-543873-30-921
+    400048: Obj3d66-543873-31-631
+    400050: Obj3d66-543873-32-9
+    400052: Obj3d66-543873-33-41
+    400054: Obj3d66-543873-34-955
+    400056: Obj3d66-543873-35-890
+    400058: Obj3d66-543873-36-724
+    400060: Obj3d66-543873-37-514
+    400062: Obj3d66-543873-38-465
+    400064: Obj3d66-543873-39-245
+    400066: Obj3d66-543873-4-341
+    400068: Obj3d66-543873-5-782
+    400070: Obj3d66-543873-6-790
+    400072: Obj3d66-543873-7-357
+    400074: Obj3d66-543873-8-977
+    400076: Obj3d66-543873-9-13
+    400078: //RootNode
+    2100000: 'Material #52'
+    2100002: 'Material #51'
+    2100004: 'Material #54'
+    2100006: 'Material #55'
+    2100008: 'Material #53'
+    2100010: 'Material #56'
+    2100012: 'Material #58'
+    2100014: 'Material #57'
+    2300000: Obj3d66-543873-1-344
+    2300002: Obj3d66-543873-10-33
+    2300004: Obj3d66-543873-11-382
+    2300006: Obj3d66-543873-12-607
+    2300008: Obj3d66-543873-13-963
+    2300010: Obj3d66-543873-14-890
+    2300012: Obj3d66-543873-15-264
+    2300014: Obj3d66-543873-16-751
+    2300016: Obj3d66-543873-17-221
+    2300018: Obj3d66-543873-18-271
+    2300020: Obj3d66-543873-19-498
+    2300022: Obj3d66-543873-2-699
+    2300024: Obj3d66-543873-20-243
+    2300026: Obj3d66-543873-21-5
+    2300028: Obj3d66-543873-22-176
+    2300030: Obj3d66-543873-23-185
+    2300032: Obj3d66-543873-24-448
+    2300034: Obj3d66-543873-25-312
+    2300036: Obj3d66-543873-26-835
+    2300038: Obj3d66-543873-27-1
+    2300040: Obj3d66-543873-28-89
+    2300042: Obj3d66-543873-29-259
+    2300044: Obj3d66-543873-3-80
+    2300046: Obj3d66-543873-30-921
+    2300048: Obj3d66-543873-31-631
+    2300050: Obj3d66-543873-32-9
+    2300052: Obj3d66-543873-33-41
+    2300054: Obj3d66-543873-34-955
+    2300056: Obj3d66-543873-35-890
+    2300058: Obj3d66-543873-36-724
+    2300060: Obj3d66-543873-37-514
+    2300062: Obj3d66-543873-38-465
+    2300064: Obj3d66-543873-39-245
+    2300066: Obj3d66-543873-4-341
+    2300068: Obj3d66-543873-5-782
+    2300070: Obj3d66-543873-6-790
+    2300072: Obj3d66-543873-7-357
+    2300074: Obj3d66-543873-8-977
+    2300076: Obj3d66-543873-9-13
+    3300000: Obj3d66-543873-1-344
+    3300002: Obj3d66-543873-10-33
+    3300004: Obj3d66-543873-11-382
+    3300006: Obj3d66-543873-12-607
+    3300008: Obj3d66-543873-13-963
+    3300010: Obj3d66-543873-14-890
+    3300012: Obj3d66-543873-15-264
+    3300014: Obj3d66-543873-16-751
+    3300016: Obj3d66-543873-17-221
+    3300018: Obj3d66-543873-18-271
+    3300020: Obj3d66-543873-19-498
+    3300022: Obj3d66-543873-2-699
+    3300024: Obj3d66-543873-20-243
+    3300026: Obj3d66-543873-21-5
+    3300028: Obj3d66-543873-22-176
+    3300030: Obj3d66-543873-23-185
+    3300032: Obj3d66-543873-24-448
+    3300034: Obj3d66-543873-25-312
+    3300036: Obj3d66-543873-26-835
+    3300038: Obj3d66-543873-27-1
+    3300040: Obj3d66-543873-28-89
+    3300042: Obj3d66-543873-29-259
+    3300044: Obj3d66-543873-3-80
+    3300046: Obj3d66-543873-30-921
+    3300048: Obj3d66-543873-31-631
+    3300050: Obj3d66-543873-32-9
+    3300052: Obj3d66-543873-33-41
+    3300054: Obj3d66-543873-34-955
+    3300056: Obj3d66-543873-35-890
+    3300058: Obj3d66-543873-36-724
+    3300060: Obj3d66-543873-37-514
+    3300062: Obj3d66-543873-38-465
+    3300064: Obj3d66-543873-39-245
+    3300066: Obj3d66-543873-4-341
+    3300068: Obj3d66-543873-5-782
+    3300070: Obj3d66-543873-6-790
+    3300072: Obj3d66-543873-7-357
+    3300074: Obj3d66-543873-8-977
+    3300076: Obj3d66-543873-9-13
+    4300000: Obj3d66-543873-1-344
+    4300002: Obj3d66-543873-2-699
+    4300004: Obj3d66-543873-3-80
+    4300006: Obj3d66-543873-4-341
+    4300008: Obj3d66-543873-5-782
+    4300010: Obj3d66-543873-6-790
+    4300012: Obj3d66-543873-7-357
+    4300014: Obj3d66-543873-8-977
+    4300016: Obj3d66-543873-9-13
+    4300018: Obj3d66-543873-10-33
+    4300020: Obj3d66-543873-11-382
+    4300022: Obj3d66-543873-12-607
+    4300024: Obj3d66-543873-13-963
+    4300026: Obj3d66-543873-14-890
+    4300028: Obj3d66-543873-15-264
+    4300030: Obj3d66-543873-16-751
+    4300032: Obj3d66-543873-17-221
+    4300034: Obj3d66-543873-18-271
+    4300036: Obj3d66-543873-19-498
+    4300038: Obj3d66-543873-20-243
+    4300040: Obj3d66-543873-21-5
+    4300042: Obj3d66-543873-22-176
+    4300044: Obj3d66-543873-23-185
+    4300046: Obj3d66-543873-24-448
+    4300048: Obj3d66-543873-25-312
+    4300050: Obj3d66-543873-26-835
+    4300052: Obj3d66-543873-27-1
+    4300054: Obj3d66-543873-28-89
+    4300056: Obj3d66-543873-29-259
+    4300058: Obj3d66-543873-30-921
+    4300060: Obj3d66-543873-31-631
+    4300062: Obj3d66-543873-32-9
+    4300064: Obj3d66-543873-33-41
+    4300066: Obj3d66-543873-34-955
+    4300068: Obj3d66-543873-35-890
+    4300070: Obj3d66-543873-36-724
+    4300072: Obj3d66-543873-37-514
+    4300074: Obj3d66-543873-38-465
+    4300076: Obj3d66-543873-39-245
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

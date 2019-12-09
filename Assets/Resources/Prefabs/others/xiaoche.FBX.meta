@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 4f6553ae9aba64168938204dd796e1af
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Archmodels55_11_black
+    100002: Archmodels55_11_carpaint
+    100004: Archmodels55_11_chrome2
+    100006: Archmodels55_11_glass
+    100008: Archmodels55_11_headlights_chrome
+    100010: Archmodels55_11_headlights_glass
+    100012: Archmodels55_11_interior
+    100014: Archmodels55_11_mirrors
+    100016: Archmodels55_11_orange_lights
+    100018: Archmodels55_11_red_lights
+    100020: Archmodels55_11_register_plate
+    100022: Archmodels55_11_rims
+    100024: Archmodels55_11_rims_caps
+    100026: Archmodels55_11_seats
+    100028: Archmodels55_11_stop_lights
+    100030: Archmodels55_11_stop_red
+    100032: Archmodels55_11_stop_white
+    100034: Archmodels55_11_texts
+    100036: Archmodels55_11_tires
+    100038: Archmodels55_11_white_glass
+    100040: //RootNode
+    400000: Archmodels55_11_black
+    400002: Archmodels55_11_carpaint
+    400004: Archmodels55_11_chrome2
+    400006: Archmodels55_11_glass
+    400008: Archmodels55_11_headlights_chrome
+    400010: Archmodels55_11_headlights_glass
+    400012: Archmodels55_11_interior
+    400014: Archmodels55_11_mirrors
+    400016: Archmodels55_11_orange_lights
+    400018: Archmodels55_11_red_lights
+    400020: Archmodels55_11_register_plate
+    400022: Archmodels55_11_rims
+    400024: Archmodels55_11_rims_caps
+    400026: Archmodels55_11_seats
+    400028: Archmodels55_11_stop_lights
+    400030: Archmodels55_11_stop_red
+    400032: Archmodels55_11_stop_white
+    400034: Archmodels55_11_texts
+    400036: Archmodels55_11_tires
+    400038: Archmodels55_11_white_glass
+    400040: //RootNode
+    2100000: 'Material #37'
+    2100002: 'Material #41'
+    2100004: 'Material #34'
+    2100006: 'Material #38'
+    2100008: 'Material #35'
+    2100010: 'Material #43'
+    2100012: 'Material #42'
+    2100014: 'Material #44'
+    2100016: 'Material #31'
+    2100018: 'Material #40'
+    2100020: 'Material #39'
+    2100022: 'Material #32'
+    2100024: 'Material #33'
+    2100026: white
+    2100028: red
+    2100030: 'Material #36'
+    2300000: Archmodels55_11_black
+    2300002: Archmodels55_11_carpaint
+    2300004: Archmodels55_11_chrome2
+    2300006: Archmodels55_11_glass
+    2300008: Archmodels55_11_headlights_chrome
+    2300010: Archmodels55_11_headlights_glass
+    2300012: Archmodels55_11_interior
+    2300014: Archmodels55_11_mirrors
+    2300016: Archmodels55_11_orange_lights
+    2300018: Archmodels55_11_red_lights
+    2300020: Archmodels55_11_register_plate
+    2300022: Archmodels55_11_rims
+    2300024: Archmodels55_11_rims_caps
+    2300026: Archmodels55_11_seats
+    2300028: Archmodels55_11_stop_lights
+    2300030: Archmodels55_11_stop_red
+    2300032: Archmodels55_11_stop_white
+    2300034: Archmodels55_11_texts
+    2300036: Archmodels55_11_tires
+    2300038: Archmodels55_11_white_glass
+    3300000: Archmodels55_11_black
+    3300002: Archmodels55_11_carpaint
+    3300004: Archmodels55_11_chrome2
+    3300006: Archmodels55_11_glass
+    3300008: Archmodels55_11_headlights_chrome
+    3300010: Archmodels55_11_headlights_glass
+    3300012: Archmodels55_11_interior
+    3300014: Archmodels55_11_mirrors
+    3300016: Archmodels55_11_orange_lights
+    3300018: Archmodels55_11_red_lights
+    3300020: Archmodels55_11_register_plate
+    3300022: Archmodels55_11_rims
+    3300024: Archmodels55_11_rims_caps
+    3300026: Archmodels55_11_seats
+    3300028: Archmodels55_11_stop_lights
+    3300030: Archmodels55_11_stop_red
+    3300032: Archmodels55_11_stop_white
+    3300034: Archmodels55_11_texts
+    3300036: Archmodels55_11_tires
+    3300038: Archmodels55_11_white_glass
+    4300000: Archmodels55_11_rims_caps
+    4300002: Archmodels55_11_tires
+    4300004: Archmodels55_11_rims
+    4300006: Archmodels55_11_interior
+    4300008: Archmodels55_11_glass
+    4300010: Archmodels55_11_red_lights
+    4300012: Archmodels55_11_orange_lights
+    4300014: Archmodels55_11_black
+    4300016: Archmodels55_11_texts
+    4300018: Archmodels55_11_white_glass
+    4300020: Archmodels55_11_carpaint
+    4300022: Archmodels55_11_register_plate
+    4300024: Archmodels55_11_headlights_glass
+    4300026: Archmodels55_11_headlights_chrome
+    4300028: Archmodels55_11_chrome2
+    4300030: Archmodels55_11_mirrors
+    4300032: Archmodels55_11_stop_white
+    4300034: Archmodels55_11_stop_red
+    4300036: Archmodels55_11_stop_lights
+    4300038: Archmodels55_11_seats
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
