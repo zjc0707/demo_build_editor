@@ -10,8 +10,9 @@ public class BuildAB : Editor
     public const string abDirectory = "Assets/AB";
     public const string suffix = ".zjc";
     public const string menu = "My Editor";
+    public const string title = "Build AB from window Project select";
 
-    [MenuItem(menu + "/Build AB from window Project select ")]
+    [MenuItem(menu + "/Build AB from window Project select")]
     static void Build()
     {
         if (!Directory.Exists(abDirectory))
@@ -30,9 +31,11 @@ public class BuildAB : Editor
         while (index < selects.Length)
         {
             Object obj = selects[index];
-            Debug.Log(index + "    " + obj.name);
+            EditorUtility.DisplayCancelableProgressBar(title, string.Format("获取文件[{0}/{1}]:{2}", index, selects.Length, obj.name), 0);
             string path = AssetDatabase.GetAssetPath(obj);
+            EditorUtility.DisplayCancelableProgressBar(title, string.Format("预处理模型[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.2f);
             string newPrefabPath = EditBoxCollider(obj, path);
+            EditorUtility.DisplayCancelableProgressBar(title, string.Format("生成模型缩略图[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.4f);
             while (AssetPreview.GetAssetPreview(obj) == null)
             {
                 Debug.Log("Load texture2D_" + (wait++) + ":" + obj.name);
@@ -40,7 +43,9 @@ public class BuildAB : Editor
             }
             Texture2D texture2D = AssetPreview.GetAssetPreview(obj);
             string newImgPath = path.Split('.')[0] + "-sprite.png";
+            EditorUtility.DisplayCancelableProgressBar(title, string.Format("模型缩略图写入本地[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.6f);
             File.WriteAllBytes(newImgPath, texture2D.EncodeToPNG());
+
             AssetBundleBuild assetBundle = new AssetBundleBuild();
             assetBundle.assetBundleName = obj.name + suffix;
             assetBundle.assetNames = new string[] { newPrefabPath, newImgPath };
@@ -50,20 +55,40 @@ public class BuildAB : Editor
             wait = 0;
         }
         AssetDatabase.Refresh();
-        ObjToAB(list.ToArray());
+        yield return ObjToAB(list.ToArray());
     }
-    private static void ObjToAB(AssetBundleBuild[] buildArray)
+    private static IEnumerator ObjToAB(AssetBundleBuild[] buildArray)
     {
-        // if (BuildPipeline.BuildAssetBundles(abDirectory, buildArray, BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets
-        //                          | BuildAssetBundleOptions.DeterministicAssetBundle, BuildTarget.StandaloneOSX))
+        EditorUtility.DisplayCancelableProgressBar(title, "生成ab包", 0.0f);
         if (BuildPipeline.BuildAssetBundles(abDirectory, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX))
         {
             Debug.Log("build AB success");
+            EditorUtility.DisplayCancelableProgressBar(title, "上传", 1.0f);
+            int index = 0;
+            while (index < buildArray.Length)
+            {
+                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectory + '/' + buildArray[index].assetBundleName);
+                byte[] bytes = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectory + '/' + buildArray[index].assetBundleName);
+                Debug.Log("大小：" + bytes.Length * 1.0f / 1024 + "kb");
+                WWWForm form = new WWWForm();
+                form.AddField("name", buildArray[index].assetBundleName);
+                form.AddBinaryData("file", bytes);
+                UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:4567/unity/model/upload", form);
+                www.SendWebRequest();
+                while (www.isDone)
+                {
+                    Debug.Log(www.uploadProgress);
+                    EditorUtility.DisplayCancelableProgressBar(title, string.Format("上传{0}/{1}", index, buildArray.Length), www.uploadProgress);
+                    yield return 1;
+                }
+                index++;
+            }
         }
         else
         {
             Debug.Log("build AB failure");
         }
+        EditorUtility.DisplayCancelableProgressBar(title, "清理缓存", 1.0f);
         foreach (AssetBundleBuild build in buildArray)
         {
             foreach (string path in build.assetNames)
@@ -72,6 +97,8 @@ public class BuildAB : Editor
             }
         }
         AssetDatabase.Refresh();
+        EditorUtility.ClearProgressBar();
+        EditorUtility.DisplayDialog(title, "上传完成", "确定");
     }
     /// <summary>
     /// 计算包围盒，再另存为带-edit后缀的新prefab
