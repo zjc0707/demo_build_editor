@@ -8,21 +8,29 @@ using UnityEditor;
 public class BuildAB : Editor
 {
     public const string abDirectory = "Assets/AB";
+    public const string abDirectoryMac = "Assets/AB/Mac";
+    public const string abDirectoryWindows = "Assets/AB/Windows";
     public const string suffix = ".zjc";
     public const string menu = "My Editor";
     public const string title = "Build AB from window Project select";
-
-    [MenuItem(menu + "/Build AB from window Project select")]
-    static void Build()
+    private static float uploadProgressFloat;
+    public static void Build(Object[] selects, int typeId)
     {
         if (!Directory.Exists(abDirectory))
         {
             Directory.CreateDirectory(abDirectory);
         }
-        Object[] selects = Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
-        EditorCoroutineRunner.StartEditorCoroutine(CoroutineBuild(selects));
+        if (!Directory.Exists(abDirectoryMac))
+        {
+            Directory.CreateDirectory(abDirectoryMac);
+        }
+        if (!Directory.Exists(abDirectoryWindows))
+        {
+            Directory.CreateDirectory(abDirectoryWindows);
+        }
+        EditorCoroutineRunner.StartEditorCoroutine(CoroutineBuild(selects, typeId));
     }
-    private static IEnumerator CoroutineBuild(Object[] selects)
+    private static IEnumerator CoroutineBuild(Object[] selects, int typeId)
     {
         Debug.Log("Start");
         List<AssetBundleBuild> list = new List<AssetBundleBuild>();
@@ -55,32 +63,38 @@ public class BuildAB : Editor
             wait = 0;
         }
         AssetDatabase.Refresh();
-        yield return ObjToAB(list.ToArray());
+        yield return ObjToAB(list.ToArray(), typeId);
     }
-    private static IEnumerator ObjToAB(AssetBundleBuild[] buildArray)
+    private static IEnumerator ObjToAB(AssetBundleBuild[] buildArray, int typeId)
     {
         EditorUtility.DisplayCancelableProgressBar(title, "生成ab包", 0.0f);
-        if (BuildPipeline.BuildAssetBundles(abDirectory, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX))
+        if (BuildPipeline.BuildAssetBundles(abDirectoryMac, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX) &&
+            BuildPipeline.BuildAssetBundles(abDirectoryWindows, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64))
         {
             Debug.Log("build AB success");
             EditorUtility.DisplayCancelableProgressBar(title, "上传", 1.0f);
             int index = 0;
             while (index < buildArray.Length)
             {
-                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectory + '/' + buildArray[index].assetBundleName);
-                byte[] bytes = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectory + '/' + buildArray[index].assetBundleName);
-                Debug.Log("大小：" + bytes.Length * 1.0f / 1024 + "kb");
+                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectoryMac + '/' + buildArray[index].assetBundleName);
+                byte[] bytesMac = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectoryMac + '/' + buildArray[index].assetBundleName);
+                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectoryWindows + '/' + buildArray[index].assetBundleName);
+                byte[] bytesWindows = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectoryWindows + '/' + buildArray[index].assetBundleName);
                 WWWForm form = new WWWForm();
                 form.AddField("name", buildArray[index].assetBundleName);
-                form.AddBinaryData("file", bytes);
-                UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:4567/unity/model/upload", form);
-                www.SendWebRequest();
-                while (www.isDone)
+                form.AddField("typeId", typeId);
+                form.AddBinaryData("fileWindows", bytesWindows);
+                form.AddBinaryData("fileMac", bytesMac);
+                uploadProgressFloat = 0;
+                yield return MyWebRequset.IPost<string>("/model/upload", form, uploadProgress =>
                 {
-                    Debug.Log(www.uploadProgress);
-                    EditorUtility.DisplayCancelableProgressBar(title, string.Format("上传{0}/{1}", index, buildArray.Length), www.uploadProgress);
-                    yield return 1;
-                }
+                    if (uploadProgress != uploadProgressFloat)
+                    {
+                        Debug.Log(uploadProgress);
+                        uploadProgressFloat = uploadProgress;
+                    }
+                    EditorUtility.DisplayCancelableProgressBar(title, string.Format("上传{0}/{1}", index, buildArray.Length), uploadProgress);
+                });
                 index++;
             }
         }
@@ -115,7 +129,16 @@ public class BuildAB : Editor
             gameObj.transform.SetParent(parent.transform);
             gameObj = parent;
         }
-        BuildingUtil.AddBoxCollider(gameObj);
+        BoxCollider boxCollider = BuildingUtil.AddBoxCollider(gameObj);
+        //优化：对齐中心点
+        if (boxCollider.center != Vector3.zero)
+        {
+            foreach (Transform t in gameObj.transform)
+            {
+                t.localPosition -= boxCollider.center;
+            }
+            boxCollider.center = Vector3.zero;
+        }
         string newPath = assetPath.Replace(".", "-edit.");
         bool success;
         PrefabUtility.SaveAsPrefabAsset(gameObj, newPath, out success);

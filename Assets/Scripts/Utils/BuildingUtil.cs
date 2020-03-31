@@ -10,7 +10,7 @@ public class BuildingUtil
         if (boxCollider == null)
         {
             CenterAndSize cs = Get(obj.transform);
-            EnableAllCollider(obj.transform);
+            DisableAllCollider(obj.transform);
             boxCollider = obj.AddComponent<BoxCollider>();
             boxCollider.center = cs.Center;
             boxCollider.size = cs.Size;
@@ -20,7 +20,7 @@ public class BuildingUtil
         // boxCollider.isTrigger = true;
         return boxCollider;
     }
-    public static void EnableAllCollider(Transform t)
+    public static void DisableAllCollider(Transform t)
     {
         foreach (Collider c in t.GetComponentsInChildren<Collider>())
         {
