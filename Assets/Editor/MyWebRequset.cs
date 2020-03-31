@@ -6,9 +6,8 @@ using System;
 using UnityEditor;
 public class MyWebRequset
 {
-    // private const int TIMEOUT = 10;
-    // private const string ip = "http://127.0.0.1:4567/unity";
-    private const string ip = "http://47.102.133.53:4567/unity/";
+    private const string ip = "http://127.0.0.1:4567/unity";
+    // private const string ip = "http://47.102.133.53:4567/unity/";
     public static IEnumerator IPost<T>(string api, WWWForm form, Action<float> uploadProgress = null, Action<float> downloadProgress = null, Action<T> success = null, Action<string> failure = null) where T : class
     {
         Debug.Log("post:" + ip + api);
