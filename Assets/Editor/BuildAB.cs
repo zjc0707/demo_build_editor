@@ -14,7 +14,7 @@ public class BuildAB : Editor
     public const string menu = "My Editor";
     public const string title = "Build AB from window Project select";
     private static float uploadProgressFloat;
-    public static void Build(Object[] selects, int typeId, bool isPackage)
+    public static void Build(Object[] selects, int typeId)
     {
         if (!Directory.Exists(abDirectory))
         {
@@ -28,50 +28,7 @@ public class BuildAB : Editor
         {
             Directory.CreateDirectory(abDirectoryWindows);
         }
-        if (isPackage)
-        {
-            EditorCoroutineRunner.StartEditorCoroutine(CoroutineBuildPackage(selects));
-        }
-        else
-        {
-            EditorCoroutineRunner.StartEditorCoroutine(CoroutineBuild(selects, typeId));
-        }
-    }
-    private static IEnumerator CoroutineBuildPackage(Object[] selects)
-    {
-        Debug.Log("Start");
-        int index = 0;
-        int wait = 0;
-        List<string> paths = new List<string>();
-        while (index < selects.Length)
-        {
-            Object obj = selects[index];
-            EditorUtility.DisplayCancelableProgressBar(title, string.Format("获取文件[{0}/{1}]:{2}", index, selects.Length, obj.name), 0);
-            string path = AssetDatabase.GetAssetPath(obj);
-            EditorUtility.DisplayCancelableProgressBar(title, string.Format("预处理模型[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.2f);
-            string newPrefabPath = EditBoxCollider(obj, path);
-            EditorUtility.DisplayCancelableProgressBar(title, string.Format("生成模型缩略图[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.4f);
-            while (AssetPreview.GetAssetPreview(obj) == null)
-            {
-                Debug.Log("Load texture2D_" + (wait++) + ":" + obj.name);
-                yield return null;
-            }
-            Texture2D texture2D = AssetPreview.GetAssetPreview(obj);
-            string newImgPath = path.Split('.')[0] + "-sprite.png";
-            EditorUtility.DisplayCancelableProgressBar(title, string.Format("模型缩略图写入本地[{0}/{1}]:{2}", index, selects.Length, obj.name), 0.6f);
-            File.WriteAllBytes(newImgPath, texture2D.EncodeToPNG());
-
-            paths.Add(newPrefabPath);
-            paths.Add(newImgPath);
-
-            index++;
-            wait = 0;
-        }
-        AssetDatabase.Refresh();
-        AssetBundleBuild assetBundle = new AssetBundleBuild();
-        assetBundle.assetBundleName = "package" + suffix;
-        assetBundle.assetNames = paths.ToArray();
-        yield return ObjToAB(new AssetBundleBuild[] { assetBundle });
+        EditorCoroutineRunner.StartEditorCoroutine(CoroutineBuild(selects, typeId));
     }
     private static IEnumerator CoroutineBuild(Object[] selects, int typeId)
     {
@@ -108,56 +65,6 @@ public class BuildAB : Editor
         AssetDatabase.Refresh();
         yield return ObjToAB(list.ToArray(), typeId);
     }
-    private static IEnumerator ObjToAB(AssetBundleBuild[] buildArray)
-    {
-        EditorUtility.DisplayCancelableProgressBar(title, "生成ab包", 0.0f);
-        if (BuildPipeline.BuildAssetBundles(abDirectoryMac, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX) &&
-            BuildPipeline.BuildAssetBundles(abDirectoryWindows, buildArray, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64))
-        {
-            Debug.Log("build AB success");
-            EditorUtility.DisplayCancelableProgressBar(title, "上传", 1.0f);
-            int index = 0;
-            while (index < buildArray.Length)
-            {
-                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectoryMac + '/' + buildArray[index].assetBundleName);
-                byte[] bytesMac = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectoryMac + '/' + buildArray[index].assetBundleName);
-                Debug.Log("获取文件：" + System.Environment.CurrentDirectory + '/' + abDirectoryWindows + '/' + buildArray[index].assetBundleName);
-                byte[] bytesWindows = File.ReadAllBytes(System.Environment.CurrentDirectory + '/' + abDirectoryWindows + '/' + buildArray[index].assetBundleName);
-                WWWForm form = new WWWForm();
-                form.AddField("name", buildArray[index].assetBundleName);
-                form.AddField("context", "");
-                form.AddBinaryData("fileWindows", bytesWindows);
-                form.AddBinaryData("fileMac", bytesMac);
-                uploadProgressFloat = 0;
-                yield return MyWebRequset.IPost<string>("/package/upload", form, uploadProgress =>
-                {
-                    if (uploadProgress != uploadProgressFloat)
-                    {
-                        Debug.Log(uploadProgress);
-                        uploadProgressFloat = uploadProgress;
-                    }
-                    EditorUtility.DisplayCancelableProgressBar(title, string.Format("上传{0}/{1}", index, buildArray.Length), uploadProgress);
-                });
-                index++;
-            }
-        }
-        else
-        {
-            Debug.Log("build AB failure");
-        }
-        EditorUtility.DisplayCancelableProgressBar(title, "清理缓存", 1.0f);
-        foreach (AssetBundleBuild build in buildArray)
-        {
-            foreach (string path in build.assetNames)
-            {
-                File.Delete(path);
-            }
-        }
-        AssetDatabase.Refresh();
-        EditorUtility.ClearProgressBar();
-        EditorUtility.DisplayDialog(title, "上传完成", "确定");
-    }
-
     private static IEnumerator ObjToAB(AssetBundleBuild[] buildArray, int typeId)
     {
         EditorUtility.DisplayCancelableProgressBar(title, "生成ab包", 0.0f);

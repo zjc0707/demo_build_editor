@@ -10,7 +10,6 @@ public class MyWindow : EditorWindow
     // public string[] types = { "a", "b", "c" };
     public List<ModelType> modelTypes;
     public int modelTypeIndex;
-    public bool isPackage;
     public bool isError;
     public bool isAddModelType;
     [MenuItem(BuildAB.menu + "/open window")]
@@ -55,57 +54,52 @@ public class MyWindow : EditorWindow
         }
         GUILayout.Space(20);
 
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Package");
-        isPackage = EditorGUILayout.Toggle(isPackage);
-        EditorGUILayout.EndHorizontal();
+        // EditorGUILayout.BeginHorizontal();
+        // EditorGUILayout.LabelField("Package");
+        // isPackage = EditorGUILayout.Toggle(isPackage);
+        // EditorGUILayout.EndHorizontal();
 
-        if (!isPackage)
+        EditorGUILayout.BeginHorizontal();
+        if (modelTypes != null && modelTypes.Count > 0)
+        {
+            EditorGUILayout.LabelField("Type");
+            modelTypeIndex = EditorGUILayout.Popup(modelTypeIndex, modelTypes.Select(s => s.Name).ToArray());
+        }
+        else
+        {
+            EditorGUILayout.HelpBox("请求后台数据中", MessageType.Info);
+        }
+        EditorGUILayout.EndHorizontal();
+        if (isAddModelType)
         {
             EditorGUILayout.BeginHorizontal();
-            if (modelTypes != null && modelTypes.Count > 0)
+            modelTypeName = EditorGUILayout.TextField("modelTypeName", modelTypeName);
+            if (GUILayout.Button("Add"))
             {
-                EditorGUILayout.LabelField("Type");
-                modelTypeIndex = EditorGUILayout.Popup(modelTypeIndex, modelTypes.Select(s => s.Name).ToArray());
-            }
-            else
-            {
-                EditorGUILayout.HelpBox("请求后台数据中", MessageType.Info);
+                if (!string.IsNullOrEmpty(modelTypeName))
+                {
+                    Debug.Log(modelTypeName);
+                    isAddModelType = false;
+                    EditorCoroutineRunner.StartEditorCoroutine(MyWebRequset.IGet<ModelType>("/modelType/add?name=" + modelTypeName, uploadProgress =>
+                    {
+                        EditorUtility.DisplayCancelableProgressBar("get", "", uploadProgress);
+                    }, null, success =>
+                    {
+                        EditorUtility.ClearProgressBar();
+                        Debug.Log(Json.Serialize(success));
+                        modelTypes.Add(success);
+                    }));
+                }
             }
             EditorGUILayout.EndHorizontal();
-            if (isAddModelType)
+        }
+        else
+        {
+            if (GUILayout.Button("Add new modelType"))
             {
-                EditorGUILayout.BeginHorizontal();
-                modelTypeName = EditorGUILayout.TextField("modelTypeName", modelTypeName);
-                if (GUILayout.Button("Add"))
-                {
-                    if (!string.IsNullOrEmpty(modelTypeName))
-                    {
-                        Debug.Log(modelTypeName);
-                        isAddModelType = false;
-                        EditorCoroutineRunner.StartEditorCoroutine(MyWebRequset.IGet<ModelType>("/modelType/add?name=" + modelTypeName, uploadProgress =>
-                        {
-                            EditorUtility.DisplayCancelableProgressBar("get", "", uploadProgress);
-                        }, null, success =>
-                        {
-                            EditorUtility.ClearProgressBar();
-                            Debug.Log(Json.Serialize(success));
-                            modelTypes.Add(success);
-                        }));
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
-            }
-            else
-            {
-                if (GUILayout.Button("Add new modelType"))
-                {
-                    isAddModelType = true;
-                }
+                isAddModelType = true;
             }
         }
-
-
 
         GUILayout.Space(20);
         if (GUILayout.Button("submit"))
@@ -116,7 +110,7 @@ public class MyWindow : EditorWindow
             }
             else
             {
-                BuildAB.Build(selects, modelTypes[modelTypeIndex].Id, isPackage);
+                BuildAB.Build(selects, modelTypes[modelTypeIndex].Id);
             }
         }
         EditorGUILayout.EndVertical();
